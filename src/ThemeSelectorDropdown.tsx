@@ -42,7 +42,7 @@ const ThemeSelectorDropdown: FC = () => {
   }, [theme])
 
   return (
-    <div className="bg-base-200 text-base-content p-4">
+    <div className="bg-base-200 text-base-content">
       <select
         className="select select-bordered w-full max-w-xs"
         value={theme}

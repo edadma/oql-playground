@@ -32,7 +32,7 @@ const App: FC = () => {
 
       <ThemeSelectorDropdown />
 
-      <div className="grid grid-cols-3 gap-4 mt-8 h-[calc(100vh-290px)]">
+      <div className="grid grid-cols-3 gap-4 mt-4 h-[calc(100vh-240px)]">
         <div className="bg-base-100 p-4 rounded shadow flex flex-col">
           <label className="block mb-2 font-bold">Data Model Input</label>
           <textarea
