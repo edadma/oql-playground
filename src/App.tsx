@@ -129,7 +129,7 @@ const App: FC = () => {
           <div className="bg-base-100 p-2 rounded shadow flex flex-col flex-1">
             <label className="block mb-2 font-bold">SQL Terminal</label>
             <textarea
-              className="textarea textarea-bordered w-full h-20 mb-4 font-mono resize-none"
+              className="textarea textarea-bordered w-full h-10 mb-4 font-mono resize-none"
               placeholder="Type SQL here..."
               onKeyDown={handleSqlKeyDown}
             ></textarea>

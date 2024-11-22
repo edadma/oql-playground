@@ -42,19 +42,17 @@ const ThemeSelectorDropdown: FC = () => {
   }, [theme])
 
   return (
-    <div className="bg-base-200 text-base-content">
-      <select
-        className="select select-bordered w-52"
-        value={theme}
-        onChange={(e) => setTheme(e.target.value)}
-      >
-        {themes.map((t) => (
-          <option key={t} value={t}>
-            {t.charAt(0).toUpperCase() + t.slice(1)}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select
+      className="select select-bordered w-52"
+      value={theme}
+      onChange={(e) => setTheme(e.target.value)}
+    >
+      {themes.map((t) => (
+        <option key={t} value={t}>
+          {t.charAt(0).toUpperCase() + t.slice(1)}
+        </option>
+      ))}
+    </select>
   )
 }
 
