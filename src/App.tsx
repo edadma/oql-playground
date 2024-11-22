@@ -1,4 +1,4 @@
-import { FC, useState, KeyboardEvent } from 'react'
+import { FC, useState, KeyboardEvent, useEffect, useRef } from 'react'
 import ThemeSelectorDropdown from './ThemeSelectorDropdown'
 
 const App: FC = () => {
@@ -6,6 +6,14 @@ const App: FC = () => {
   const [sqlLog, setSqlLog] = useState<string[]>([])
   const [dataModel, setDataModel] = useState<string>('') // State for data model
   const [demoDatabase, setDemoDatabase] = useState<string>('') // State for selected demo database
+  const sqlLogRef = useRef<HTMLDivElement>(null) // Reference to the SQL log container
+
+  // Auto-scroll to the bottom when the SQL log changes
+  useEffect(() => {
+    if (sqlLogRef.current) {
+      sqlLogRef.current.scrollTo({ top: sqlLogRef.current.scrollHeight, behavior: 'smooth' })
+    }
+  }, [sqlLog])
 
   const demoOptions: Record<string, string> = {
     'Simple User DB': 'User { id: ID, name: String, email: String }',
