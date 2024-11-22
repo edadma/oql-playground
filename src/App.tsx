@@ -46,25 +46,24 @@ const App: FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <div className="bg-base-100 p-4 rounded shadow flex-grow">
+        <div className="flex flex-col gap-4 h-full">
+          <div className="bg-base-100 p-4 rounded shadow flex flex-col flex-1">
             <label className="block mb-2 font-bold">OQL Query Input</label>
             <textarea
-              className="textarea textarea-bordered w-full h-32 mb-4 font-mono"
+              className="textarea textarea-bordered w-full flex-grow font-mono resize-none"
               placeholder="Type OQL query here..."
             ></textarea>
-            <button className="btn btn-primary w-full mb-4" onClick={handleOqlSubmit}>
-              Run OQL Query
-            </button>
+            <button className="btn btn-primary w-full mt-4">Run OQL Query</button>
           </div>
-          <div className="bg-base-100 p-4 rounded shadow flex-grow">
+
+          <div className="bg-base-100 p-4 rounded shadow flex flex-col flex-1">
             <label className="block mb-2 font-bold">SQL Terminal</label>
             <textarea
-              className="textarea textarea-bordered w-full h-20 mb-4 font-mono"
+              className="textarea textarea-bordered w-full h-20 mb-4 font-mono resize-none"
               placeholder="Type SQL here..."
               onKeyDown={handleSqlKeyDown}
             ></textarea>
-            <div className="bg-base-200 p-2 h-40 overflow-y-auto text-sm rounded font-mono">
+            <div className="bg-base-200 p-2 rounded flex-grow overflow-y-auto text-sm font-mono">
               {sqlLog.map((entry, index) => (
                 <div key={index}>{entry}</div>
               ))}
@@ -72,10 +71,16 @@ const App: FC = () => {
           </div>
         </div>
 
-        <div className="bg-base-100 p-4 rounded shadow overflow-auto">
+        <div className="bg-base-100 p-4 rounded shadow flex flex-col h-full">
+          {' '}
+          {/* Added flex-col and h-full */}
           <label className="block mb-2 font-bold">Query Results</label>
-          <div className="bg-base-200 p-4 rounded h-96 overflow-y-auto">
+          <div className="bg-base-200 p-4 rounded flex-grow overflow-y-auto">
+            {' '}
+            {/* Changed h-96 to flex-grow */}
             <pre className="text-sm font-mono h-full">
+              {' '}
+              {/* Ensured h-full */}
               {JSON.stringify(oqlResult, null, 2) || '{}'}
             </pre>
           </div>
