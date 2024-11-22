@@ -53,7 +53,9 @@ const App: FC = () => {
               className="textarea textarea-bordered w-full flex-grow font-mono resize-none"
               placeholder="Type OQL query here..."
             ></textarea>
-            <button className="btn btn-primary w-full mt-4">Run OQL Query</button>
+            <button className="btn btn-primary w-full mt-4" onClick={handleOqlSubmit}>
+              Run OQL Query
+            </button>
           </div>
 
           <div className="bg-base-100 p-4 rounded shadow flex flex-col flex-1">
@@ -72,16 +74,10 @@ const App: FC = () => {
         </div>
 
         <div className="bg-base-100 p-4 rounded shadow flex flex-col h-full">
-          {' '}
-          {/* Added flex-col and h-full */}
           <label className="block mb-2 font-bold">Query Results</label>
           <div className="bg-base-200 p-4 rounded flex-grow overflow-y-auto">
-            {' '}
-            {/* Changed h-96 to flex-grow */}
             <pre className="text-sm font-mono h-full">
-              {' '}
-              {/* Ensured h-full */}
-              {JSON.stringify(oqlResult, null, 2) || '{}'}
+              {oqlResult ? JSON.stringify(oqlResult, null, 2) : ''}
             </pre>
           </div>
         </div>
