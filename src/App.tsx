@@ -4,6 +4,37 @@ import ThemeSelectorDropdown from './ThemeSelectorDropdown'
 const App: FC = () => {
   const [oqlResult, setOqlResult] = useState<Record<string, unknown> | null>(null)
   const [sqlLog, setSqlLog] = useState<string[]>([])
+  const [dataModel, setDataModel] = useState<string>('') // State for data model
+  const [demoDatabase, setDemoDatabase] = useState<string>('') // State for selected demo database
+
+  const demoOptions = {
+    'Simple User DB': 'User { id: ID, name: String, email: String }',
+    'Product Inventory': 'Product { id: ID, name: String, price: Float, stock: Int }',
+    'Blog Platform': 'Post { id: ID, title: String, content: String, author: ID }',
+  }
+
+  const handleDemoSelection = (option: string): void => {
+    const model = demoOptions[option]
+    setDataModel(model) // Populate data model textarea
+    setDemoDatabase(option) // Track selected demo database
+    // Automatically trigger database creation logic
+    handleCreateDatabase(model)
+  }
+
+  const handleCreateDatabase = (model: string): void => {
+    setSqlLog((prev) => [
+      ...prev,
+      `Creating database: ${demoDatabase}`,
+      'Database created successfully.',
+    ])
+    console.log('Database created with data model:', model) // Replace with actual creation logic
+  }
+
+  const handleClearDatabase = (): void => {
+    setDataModel('') // Clear the data model
+    setSqlLog((prev) => [...prev, 'Database cleared.'])
+    console.log('Database cleared.') // Replace with actual clear logic
+  }
 
   const handleOqlSubmit = (): void => {
     const mockResult = { data: { message: 'Hello OQL!' } } // Replace with OQL logic
@@ -32,6 +63,19 @@ const App: FC = () => {
 
       <ThemeSelectorDropdown />
 
+      <select
+        className="select select-bordered w-full max-w-xs"
+        value={demoDatabase}
+        onChange={(e) => handleDemoSelection(e.target.value)}
+      >
+        <option value="">Select a demo...</option>
+        {Object.keys(demoOptions).map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+
       <div className="grid grid-cols-3 gap-4 mt-4 h-[calc(100vh-240px)]">
         <div className="bg-base-100 p-4 rounded shadow flex flex-col">
           <label className="block mb-2 font-bold">Data Model Input</label>
@@ -41,8 +85,15 @@ const App: FC = () => {
             style={{ minHeight: '200px' }}
           ></textarea>
           <div className="flex gap-2">
-            <button className="btn btn-success flex-1">Create Database</button>
-            <button className="btn btn-error flex-1">Clear Database</button>
+            <button
+              className="btn btn-success flex-1"
+              onClick={() => handleCreateDatabase(dataModel)}
+            >
+              Create Database
+            </button>
+            <button className="btn btn-error flex-1" onClick={handleClearDatabase}>
+              Clear Database
+            </button>
           </div>
         </div>
 
