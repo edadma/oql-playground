@@ -7,7 +7,7 @@ const App: FC = () => {
   const [dataModel, setDataModel] = useState<string>('') // State for data model
   const [demoDatabase, setDemoDatabase] = useState<string>('') // State for selected demo database
 
-  const demoOptions = {
+  const demoOptions: Record<string, string> = {
     'Simple User DB': 'User { id: ID, name: String, email: String }',
     'Product Inventory': 'Product { id: ID, name: String, price: Float, stock: Int }',
     'Blog Platform': 'Post { id: ID, title: String, content: String, author: ID }',
@@ -61,20 +61,21 @@ const App: FC = () => {
         <p className="mt-2 text-lg">Explore OQL and SQL with an in-browser database</p>
       </div>
 
-      <ThemeSelectorDropdown />
-
-      <select
-        className="select select-bordered w-full max-w-xs"
-        value={demoDatabase}
-        onChange={(e) => handleDemoSelection(e.target.value)}
-      >
-        <option value="">Select a demo...</option>
-        {Object.keys(demoOptions).map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      <div className="flex items-center gap-4 mb-4">
+        <ThemeSelectorDropdown />
+        <select
+          className="select select-bordered w-52"
+          value={demoDatabase}
+          onChange={(e) => handleDemoSelection(e.target.value)}
+        >
+          <option value="">Select a demo...</option>
+          {Object.keys(demoOptions).map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div className="grid grid-cols-3 gap-4 mt-4 h-[calc(100vh-240px)]">
         <div className="bg-base-100 p-4 rounded shadow flex flex-col">
@@ -116,7 +117,7 @@ const App: FC = () => {
               placeholder="Type SQL here..."
               onKeyDown={handleSqlKeyDown}
             ></textarea>
-            <div className="bg-base-200 p-2 rounded flex-grow overflow-y-auto text-sm font-mono">
+            <div className="bg-base-200 p-2 rounded flex-grow overflow-y-auto text-sm font-mono h-0">
               {sqlLog.map((entry, index) => (
                 <div key={index}>{entry}</div>
               ))}
@@ -126,7 +127,7 @@ const App: FC = () => {
 
         <div className="bg-base-100 p-4 rounded shadow flex flex-col h-full">
           <label className="block mb-2 font-bold">Query Results</label>
-          <div className="bg-base-200 p-4 rounded flex-grow overflow-y-auto">
+          <div className="bg-base-200 p-4 rounded flex-grow overflow-y-auto h-0">
             <pre className="text-sm font-mono h-full">
               {oqlResult ? JSON.stringify(oqlResult, null, 2) : ''}
             </pre>

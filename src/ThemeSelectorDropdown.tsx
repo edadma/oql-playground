@@ -44,7 +44,7 @@ const ThemeSelectorDropdown: FC = () => {
   return (
     <div className="bg-base-200 text-base-content">
       <select
-        className="select select-bordered w-full max-w-xs"
+        className="select select-bordered w-52"
         value={theme}
         onChange={(e) => setTheme(e.target.value)}
       >
