@@ -32,7 +32,7 @@ const App: FC = () => {
 
       <ThemeSelectorDropdown />
 
-      <div className="grid grid-cols-3 gap-4 mt-8">
+      <div className="grid grid-cols-3 gap-4 mt-8 h-[calc(100vh-290px)]">
         <div className="bg-base-100 p-4 rounded shadow flex flex-col">
           <label className="block mb-2 font-bold">Data Model Input</label>
           <textarea
@@ -47,7 +47,7 @@ const App: FC = () => {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="bg-base-100 p-4 rounded shadow">
+          <div className="bg-base-100 p-4 rounded shadow flex-grow">
             <label className="block mb-2 font-bold">OQL Query Input</label>
             <textarea
               className="textarea textarea-bordered w-full h-32 mb-4 font-mono"
@@ -57,8 +57,7 @@ const App: FC = () => {
               Run OQL Query
             </button>
           </div>
-
-          <div className="bg-base-100 p-4 rounded shadow">
+          <div className="bg-base-100 p-4 rounded shadow flex-grow">
             <label className="block mb-2 font-bold">SQL Terminal</label>
             <textarea
               className="textarea textarea-bordered w-full h-20 mb-4 font-mono"
@@ -76,7 +75,9 @@ const App: FC = () => {
         <div className="bg-base-100 p-4 rounded shadow overflow-auto">
           <label className="block mb-2 font-bold">Query Results</label>
           <div className="bg-base-200 p-4 rounded h-96 overflow-y-auto">
-            <pre className="text-sm font-mono">{JSON.stringify(oqlResult, null, 2) || '{}'}</pre>
+            <pre className="text-sm font-mono h-full">
+              {JSON.stringify(oqlResult, null, 2) || '{}'}
+            </pre>
           </div>
         </div>
       </div>
